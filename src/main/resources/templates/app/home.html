@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html th:replace="~{app :: layout(~{::title}, ~{::div})}">
+
+<head>
+    <title>App</title>
+</head>
+
+<body>
+
+<div th:insert="base :: nav-app"></div>
+
+<div class="container my-5">
+    <div class="row">
+
+        <div class="col-12 col-sm-12 col-md-12 col-lg-3 fs-5 mb-4">
+            <div class="card">
+                <h2 class="card-header text-uppercase fs-5">Filtros</h2>
+
+                <div class="card-body">
+
+                    <input type="search" id="search" class="form-control" placeholder="Pesquisar no Cofre">
+
+                    <ul class="list-unstyled list-group p-2">
+                        <li class="pt-1 active">
+                            <a href="#" class="text-decoration-none link-dark">
+                                <i class="bi-columns-gap"></i> Todos os Itens
+                            </a>
+                        </li>
+                        <li class="pt-1 ">
+                            <a href="#" class="text-decoration-none link-dark">
+                                <i class="bi-star"></i> Favoritos
+                            </a>
+                        </li>
+
+                        <li class="pt-1 ">
+                            <a href="#" class="text-decoration-none link-dark">
+                                <i class="bi-trash"></i> Lixeira
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="list-unstyled list-group p-2">
+                        <h3 class="text-uppercase display-6 fs-6">Tipos</h3>
+                        <li class="pt-1 ">
+                            <a href="#" class="text-decoration-none link-dark">
+                                <i class="bi-globe2"></i> Credencial
+                            </a>
+                        </li>
+                        <li class="pt-1 ">
+                            <a href="#" class="text-decoration-none link-dark">
+                                <i class="bi-credit-card"></i> Cartão
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="list-unstyled list-group p-2">
+                        <h3 class="text-uppercase display-6 fs-6 d-flex align-items-center">
+                            Pastas
+                            <a href="#addPasta" class="text-muted ms-auto fs-4" title="Adicionar Pasta"
+                               aria-label="Adicionar Pasta" data-bs-toggle="modal" data-bs-target="#addPasta">
+                                <i aria-hidden="true" class="bi-plus"></i>
+                            </a>
+                        </h3>
+                        <li class="pt-1">
+                            <a href="#" class="text-break text-decoration-none link-dark">
+                                <i aria-hidden="true" class="bi-folder"></i>
+                                Nenhuma Pasta
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-12 col-md-12 col-lg-9">
+
+            <div class="page-header d-flex flex-wrap justify-content-between">
+                <h1>Meu Cofre</h1>
+                <div class="d-flex flex-wrap align-items-end gap-2">
+
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-outline-secondary btn-sm fs-5 active">
+                            <i aria-hidden="true" class="bi-list-ul"></i>
+                        </button>
+
+                        <button type="button" class="btn btn-outline-secondary btn-sm fs-5">
+                            <i aria-hidden="true" class="bi-grid-3x3-gap"></i>
+                        </button>
+                    </div>
+
+                    <div class="dropdown">
+
+                        <button type="button" id="actionsButton" data-bs-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false" class="btn btn-sm btn-outline-secondary dropdown-toggle fs-5"
+                                title="Opções" aria-label="Opções" data-bs-offset="0, 10">
+                            <i aria-hidden="true" class="bi-gear"></i>
+                        </button>
+
+                        <div aria-labelledby="actionsButton" class="dropdown-menu">
+                            <button class="dropdown-item">
+                                <i aria-hidden="true" class="bi-folder"></i>
+                                Mover Selecionados
+                            </button>
+
+                            <button class="dropdown-item text-danger">
+                                <i aria-hidden="true" class="bi-trash"></i>
+                                Excluir Selecionados
+                            </button>
+
+                            <div class="dropdown-divider"></div>
+
+                            <button class="dropdown-item">
+                                <i aria-hidden="true" class="bi-check-square"></i>
+                                Selecionar Todos
+                            </button>
+
+                            <button class="dropdown-item">
+                                <i aria-hidden="true" class="bi-dash-square"></i>
+                                Desmarcar Todos
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+
+                        <button type="button" id="actionsAdd" data-bs-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false" class="btn btn-sm btn-primary dropdown-toggle fs-5" title="Opções"
+                                aria-label="Opções" data-bs-offset="0, 10">
+                            <i aria-hidden="true" class="bi-plus"></i> Adicionar
+                        </button>
+
+                        <div aria-labelledby="actionsAdd" class="dropdown-menu">
+                            <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addPasta">
+                                <i aria-hidden="true" class="bi-folder-plus"></i>
+                                Adicionar pasta
+                            </button>
+
+                            <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addCredencial">
+                                <i aria-hidden="true" class="bi-globe2"></i>
+                                Adicionar credencial
+                            </button>
+
+                            <button class="dropdown-item">
+                                <i aria-hidden="true" class="bi-credit-card"></i>
+                                Adicionar cartão
+                            </button>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <hr>
+
+            <ul class="list-group list-group-flush mt-4">
+
+                <li class="list-group-item list-group-item-action fs-4">
+
+                    <label class="row">
+
+                        <div class="col-12 p-4">
+
+                            <div class="row mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <div class="">
+                                        <input class="form-check-input flex-shrink-0" type="checkbox">
+                                        <i class="bi-globe mx-3" aria-hidden="true"></i>
+                                        <a href="#" class="text-decoration-none" title="Editar Item">Title</a>
+                                    </div>
+                                    <div class="dropdown">
+
+                                        <button type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false"
+                                                class="btn btn-outline-secondary dropdown-toggle fs-5"
+                                                data-bs-offset="0, 10" title="Opções" aria-label="Opções">
+                                            <i aria-hidden="true" class="bi-three-dots-vertical"></i>
+                                        </button>
+
+                                        <div aria-labelledby="dropdownMenuButton" class="dropdown-menu">
+
+                                            <a href="#" class="dropdown-item">
+                                                <i aria-hidden="true" class="bi-box-arrow-up-right"></i>
+                                                Abrir
+                                            </a>
+
+                                            <a href="#" class="dropdown-item">
+                                                <i aria-hidden="true" class="bi-pencil"></i>
+                                                Editar
+                                            </a>
+
+                                            <a href="#" class="dropdown-item">
+                                                <i aria-hidden="true" class="bi-folder"></i>
+                                                Mover
+                                            </a>
+
+                                            <a href="#" class="dropdown-item">
+                                                <i aria-hidden="true" class="bi-star"></i>
+                                                Favoritos
+                                            </a>
+
+                                            <a href="#" class="dropdown-item">
+                                                <i aria-hidden="true" class="bi-share"></i>
+                                                Compartilhar
+                                            </a>
+
+                                            <a href="#" class="dropdown-item">
+                                                <i aria-hidden="true" class="bi-files"></i>
+                                                Clonar
+                                            </a>
+
+                                            <a href="#" class="dropdown-item text-danger">
+                                                <i aria-hidden="true" class="bi-trash"></i>
+                                                Excluir
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row g-2 ms-5 mb-3">
+                                <div class="col-10 col-sm-10 col-md-10 col-lg-6">
+                                    <input type="email" class="form-control" value="user@email.com" disabled readonly>
+                                </div>
+                                <div class="col">
+                                    <a href="#" class="" title="Copiar para a área de transferência">
+                                        <i class="bi-files" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="row g-2 ms-5 mb-3">
+                                <div class="col-10 col-sm-10 col-md-10 col-lg-6">
+                                    <input type="password" class="form-control" value="user@email.com" disabled
+                                           readonly>
+                                </div>
+
+                                <div class="col">
+                                    <a href="#" class="d-inline-block" title="Copiar para a área de transferência">
+                                        <i class="bi-files" aria-hidden="true"></i>
+                                    </a>
+                                    <a href="#" class="d-inline-block" title="Exibir"><i class="bi-eye"
+                                                                                         aria-hidden="true"></i></a>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </label>
+
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addPasta" tabindex="-1" aria-labelledby="Adicionar Pasta" aria-hidden="true">
+
+        <div class="modal-dialog">
+            <form class="modal-content">
+
+                <div class="modal-header">
+                    <h2 id="folderAddEditTitle" class="modal-title text-uppercase fs-5 display-1">Adicionar Pasta</h2>
+                    <button type="button" data-bs-dismiss="modal" class="btn-close" title="Fechar" aria-label="Fechar">
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <label for="nomePasta">Nome</label>
+                    <input id="nomePasta" type="text" name="Name" class="form-control">
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-submit">
+                        <i aria-hidden="true" class="bi bi-spinner bi-spin" title="Carregando"></i>
+                        <span>Salvar</span>
+                    </button>
+                    <button type="button" data-bs-dismiss="modal" class="btn btn-outline-secondary">
+                        Cancelar
+                    </button>
+                    <div class="ms-auto">
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <!---->
+
+    <!-- Modal -->
+    <div class="modal fade" id="addCredencial" tabindex="-1" aria-labelledby="Adicionar Item" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+            <form class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title text-uppercase fs-5">Adicionar Item</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-6 form-group mb-3">
+                            <label for="type" class="">Que tipo de item é este?</label>
+                            <select id="type" name="Type" class="form-control">
+                                <option value="0">Credencial</option>
+                                <option value="1">Cartão</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!---->
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-6 form-group mb-3">
+                            <label for="nomeItem">Nome</label>
+                            <input id="nomeItem" type="text" name="Name" required="" class="form-control">
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-6 form-group mb-3">
+                            <label for="folder">Pasta</label>
+                            <select id="folder" name="FolderId" class="form-control">
+                                <option value="0: null">Nenhuma Pasta</option>
+                                <!---->
+                            </select>
+                        </div>
+                        <!---->
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-6 form-group mb-3">
+                            <label for="loginUsername">Nome de Usuário</label>
+                            <div class="input-group">
+                                <input id="loginUsername" type="text" name="Login.Username" class="form-control">
+                                <button type="button" class="btn btn-outline-secondary" title="Copiar Nome de Usuário"
+                                        aria-label="Copiar Nome de Usuário">
+                                    <i aria-hidden="true" class="bi-files"></i>
+                                </button>
+                                <!---->
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-6 form-group mb-3">
+                            <div class="d-flex">
+                                <label for="loginPassword">Senha</label>
+                                <div class="ms-auto d-flex">
+                                    <a href="#" class="d-block fs-4 me-2" title="Gerar Senha" aria-label="Gerar Senha">
+                                        <i aria-hidden="true" class="bi-arrow-repeat"></i>
+                                    </a>
+                                    <!---->
+                                    <a href="#" class="d-block fs-4" title="Verifique se a senha foi exposta."
+                                       aria-label="Verifique se a senha foi exposta.">
+                                        <i aria-hidden="true" class="bi-check-circle"></i>
+                                        <i aria-hidden="true" class="bi-spinner bi-spin" title="Carregando"
+                                           hidden=""></i>
+                                    </a>
+                                </div>
+                                <!---->
+                            </div>
+                            <div class="input-group">
+                                <input id="loginPassword" name="Login.Password" class="form-control text-monospace"
+                                       type="password">
+                                <button type="button" class="btn btn-outline-secondary" title="Alternar Visibilidade"
+                                        aria-label="Alternar Visibilidade">
+                                    <i aria-hidden="true" class="bi-eye"></i>
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary" title="Copiar Senha"
+                                        aria-label="Copiar Senha">
+                                    <i aria-hidden="true" class="bi-files"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="row">
+                            <div class="col form-group mb-3">
+                                <label for="loginUri0">URI 1</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="loginUri0"
+                                           placeholder="ex. https://google.com">
+                                    <button type="button" class="btn btn-outline-secondary" disabled="" title="Abrir"
+                                            aria-label="Abrir">
+                                        <i aria-hidden="true" class="bi-box-arrow-up-right"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-outline-secondary" title="Copiar URI"
+                                            aria-label="Copiar URI">
+                                        <i aria-hidden="true" class="bi-files"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!---->
+                        <a href="#" class="d-inline-block my-2 fs-6 text-decoration-none">
+                            <i aria-hidden="true" class="bi-plus-circle"></i> Novo URI
+                        </a>
+                        <!---->
+
+                        <h3 class="mt-4 text-uppercase fs-5">Campos Personalizados</h3>
+                        <!---->
+                        <div class="cdk-drop-list " id="cdk-drop-list-2">
+
+                            <div class="cdk-drag row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-5 form-group mb-3">
+                                    <div class="d-flex">
+                                        <label for="fieldName0">Nome</label>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="fieldName0">
+                                        <button type="button" class="btn btn-outline-secondary" title="Copiar Valor"
+                                                aria-label="Copiar Valor">
+                                            <i aria-hidden="true" class="bi-files"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-7 form-group mb-3">
+                                    <label for="fieldValue0">Valor</label>
+                                    <div class="d-flex align-items-center">
+
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="fieldValue0">
+                                            <button type="button" class="btn btn-outline-secondary" title="Copiar Valor"
+                                                    aria-label="Copiar Valor">
+                                                <i aria-hidden="true" class="bi-files"></i>
+                                            </button>
+                                        </div>
+                                        <!---->
+                                        <button type="button" class="btn btn-link text-danger ms-2 " title="Remover"
+                                                aria-label="Remover">
+                                            <i aria-hidden="true" class="bi-dash-circle"></i>
+                                        </button>
+                                        <!---->
+                                        <button type="button" class="btn btn-link text-muted cursor-move "
+                                                title="Arrastar para ordenar" aria-label="Arrastar para ordenar">
+                                            <i aria-hidden="true" class="bi-list"></i>
+                                        </button>
+                                        <!---->
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!---->
+                            <div class="cdk-drag row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-5 form-group mb-3">
+                                    <div class="d-flex">
+                                        <label for="fieldName1">Nome</label>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="fieldName1">
+                                        <button type="button" class="btn btn-outline-secondary" title="Copiar Valor"
+                                                aria-label="Copiar Valor">
+                                            <i aria-hidden="true" class="bi-files"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-7 form-group mb-3">
+                                    <label for="fieldValue1">Valor</label>
+                                    <div class="d-flex align-items-center">
+                                        <div class="input-group">
+                                            <input autocomplete="new-password" class="form-control text-monospace"
+                                                   id="fieldValue1" type="password">
+                                            <button type="button" class="btn btn-outline-secondary"
+                                                    title="Alternar Visibilidade" aria-label="Alternar Visibilidade">
+                                                <i aria-hidden="true" class="bi-eye">
+                                                </i>
+                                            </button>
+                                            <button type="button" class="btn btn-outline-secondary" title="Copiar Valor"
+                                                    aria-label="Copiar Valor">
+                                                <i aria-hidden="true" class="bi-files"></i>
+                                            </button>
+                                        </div>
+
+                                        <button type="button" class="btn btn-link text-danger ms-2 " title="Remover"
+                                                aria-label="Remover">
+                                            <i aria-hidden="true" class="bi-dash-circle"></i>
+                                        </button>
+                                        <!---->
+                                        <button type="button" class="btn btn-link text-muted cursor-move "
+                                                title="Arrastar para ordenar" aria-label="Arrastar para ordenar">
+                                            <i aria-hidden="true" class="bi-list"></i>
+                                        </button>
+                                        <!---->
+                                    </div>
+                                </div>
+                            </div>
+                            <!---->
+                            <div class="cdk-drag row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-5 form-group mb-3">
+                                    <div class="d-flex">
+                                        <label for="fieldName2">Nome</label>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="fieldName2">
+                                        <button type="button" class="btn btn-outline-secondary" title="Copiar Valor"
+                                                aria-label="Copiar Valor">
+                                            <i aria-hidden="true" class="bi-files"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-7 form-group mb-3">
+                                    <label for="fieldValue2" class="form-check-label">Valor</label>
+                                    <div class="d-flex align-items-center">
+
+                                        <div class="flex-fill">
+                                            <input type="checkbox" id="fieldValue2" class="form-check-input">
+                                        </div>
+
+                                        <button type="button" class="btn btn-link text-danger ms-2" title="Remover"
+                                                aria-label="Remover">
+                                            <i aria-hidden="true" class="bi-dash-circle"></i>
+                                        </button>
+                                        <!---->
+                                        <button type="button" class="btn btn-link text-muted cursor-move "
+                                                title="Arrastar para ordenar" aria-label="Arrastar para ordenar">
+                                            <i aria-hidden="true" class="bi-list"></i>
+                                        </button>
+                                        <!---->
+                                    </div>
+                                </div>
+                            </div>
+                            <!---->
+                        </div>
+
+                        <a href="#" class="d-inline-block fs-6 text-decoration-none mb-3">
+                            <i aria-hidden="true" class="bi-plus-circle"></i> Novo Campo Personalizado
+                        </a>
+                        <!---->
+                        <div class="row">
+                            <div class="col-5">
+                                <label for="addFieldType" class="sr-only">Tipo</label>
+                                <select id="addFieldType" name="AddFieldType"
+                                        class="form-control ng-untouched ng-pristine ng-valid">
+                                    <option value="0: 0">Texto</option>
+                                    <option value="1: 1">Ocultado</option>
+                                    <option value="2: 2">Booleano</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!---->
+                        <!---->
+                        <div class="row">
+                            <h3 class="mt-4 text-uppercase fs-5">Opção</h3>
+                            <div class="form-check ms-2">
+                                <input type="checkbox" id="passwordPrompt" name="passwordPrompt"
+                                       class="form-check-input">
+                                <label for="passwordPrompt" class="form-check-label">Nova solicitação de senha
+                                    mestra</label>
+                            </div>
+                        </div>
+                        <!---->
+                        <!---->
+                    </div>
+                </div>
+                <!---->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-submit">
+                        <i aria-hidden="true" class="bi-spinner bi-spin" title="Carregando"></i>
+                        <span>Salvar</span>
+                    </button>
+                    <button type="button" data-bs-dismiss="modal" class="btn btn-outline-secondary">
+                        Cancelar
+                    </button>
+                    <div class="ms-auto">
+                        <button type="button" class="btn btn-link" title="Favorito" aria-label="Favorito">
+                            <i aria-hidden="true" class="bi-star"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!---->
+
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br" th:replace="~{app :: layout(~{::title}, ~{::div})}">
+
+<head>
+    <title>Login</title>
+</head>
+
+<body>
+<div class="container">
+
+    <div class="d-flex flex-column align-items-center justify-content-center mt-4">
+
+        <div th:if="${param.error}"
+             class="alert alert-danger alert-dismissible fade show col-10 col-sm-10 col-md-7 col-lg-5"
+             role="alert">
+            <div class="">
+                <i class="bi bi-exclamation-triangle me-1"></i> E-mail e senha inválidos.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+
+        <div class="card col-10 col-sm-10 col-md-7 col-lg-5 p-4">
+            <form th:action="@{/login}" method="post">
+
+                <div class="text-center mb-3">
+                    <a th:href="@{/}">
+                        <img th:src="@{assets/logo/logo-height-black.svg}" alt="logo keystow" class="img-fluid">
+                    </a>
+                    <h1 class="display-6 fs-4 mt-4">Inicie a sessão ou crie uma conta para acessar seu cofre
+                        seguro.</h1>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="email" name="email" class="form-control" id="floatingInput"
+                           placeholder="name@example.com">
+                    <label for="floatingInput">Endereço de E-mail</label>
+                </div>
+
+                <div class="form-floating">
+                    <input type="password" name="password" class="form-control" id="floatingPassword"
+                           placeholder="Password">
+                    <label for="floatingPassword">Digite sua senha</label>
+                    <div class="mt-2"><a href="/dica" class="text-decoration-none">Obter dica de senha mestra</a></div>
+                </div>
+
+                <div class="mt-2 form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Lembrar e-mail</label>
+                </div>
+
+                <hr>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-lg bg-primary text-white">Fazer login</button>
+                </div>
+
+                <hr>
+
+                <div class="d-grid gap-3">
+                    <a type="submit" class="btn btn-lg bg-white border-light shadow-sm" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="37.667" height="37.667"
+                             viewBox="0 0 37.667 37.667">
+                            <path d="M17.784,7.282a10.438,10.438,0,0,1,7.282,2.8L30.382,4.9A18.1,18.1,0,0,0,17.784,0,18.82,18.82,0,0,0,.96,10.379l6.089,4.729A11.384,11.384,0,0,1,17.784,7.282Z"
+                                  transform="translate(1.049)" fill="#ea4335" fill-rule="evenodd"/>
+                            <path d="M27.08,11.21a16.134,16.134,0,0,0-.4-3.85H9v6.989H19.379a9.2,9.2,0,0,1-3.85,6.11l5.943,4.6A18.414,18.414,0,0,0,27.08,11.21Z"
+                                  transform="translate(9.833 8.041)" fill="#4285f4" fill-rule="evenodd"/>
+                            <path d="M8.119,17.139a11.593,11.593,0,0,1-.628-3.725A12.184,12.184,0,0,1,8.1,9.689L2.009,4.96a18.793,18.793,0,0,0,0,16.908Z"
+                                  transform="translate(0 5.419)" fill="#fbbc05" fill-rule="evenodd"/>
+                            <path d="M17.774,25.889a17.95,17.95,0,0,0,12.472-4.562l-5.943-4.6a11.147,11.147,0,0,1-6.529,1.883A11.338,11.338,0,0,1,7.059,10.78L.97,15.509A18.788,18.788,0,0,0,17.774,25.889Z"
+                                  transform="translate(1.06 11.778)" fill="#34a853" fill-rule="evenodd"/>
+                            <path d="M0,0H37.667V37.667H0Z" fill="none" fill-rule="evenodd"/>
+                        </svg>
+                        Registre-se pelo Google
+                    </a>
+
+                    <a type="submit" class="btn btn-lg bg-white border-light shadow-sm" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="37" height="37" viewBox="0 0 37 37">
+                            <path d="M34.958,37A2.042,2.042,0,0,0,37,34.958V2.042A2.042,2.042,0,0,0,34.958,0H2.042A2.042,2.042,0,0,0,0,2.042V34.958A2.042,2.042,0,0,0,2.042,37H34.958"
+                                  fill="#395185"/>
+                            <path d="M113.678,69.229V55.287h4.68l.7-5.433h-5.38V46.385c0-1.573.437-2.645,2.693-2.645h2.877V38.879a38.458,38.458,0,0,0-4.192-.214c-4.148,0-6.988,2.532-6.988,7.182v4.007h-4.692v5.433h4.692V69.229h5.611"
+                                  transform="translate(-88.117 -32.229)" fill="#fff"/>
+                        </svg>
+                        Continuar pelo Facebook
+                    </a>
+                </div>
+
+                <p class="mt-4 align-baseline">Ainda não tem uma conta?
+                    <a class="text-decoration-none fw-bold" th:href="@{/user/signup}">
+                        Criar conta
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                            <path id="ic_open_in_new_24px"
+                                  d="M19,19H5V5h7V3H5A2,2,0,0,0,3,5V19a2,2,0,0,0,2,2H19a2.006,2.006,0,0,0,2-2V12H19ZM14,3V5h3.59L7.76,14.83l1.41,1.41L19,6.41V10h2V3Z"
+                                  transform="translate(-3 -3)" fill="#45d"/>
+                        </svg>
+                    </a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+</body>
+
+</html>

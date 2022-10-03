@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br" th:replace="~{app :: layout(~{::title}, ~{::div})}">
+
+<head>
+    <title>Inscrever-se</title>
+</head>
+
+<body>
+<div class="container my-5">
+    <div class="row m-4">
+        <div class="card col-10 col-sm-10 col-md col-lg-9 m-auto">
+
+            <form th:action="@{/user/create}" method="post" th:object="${userDto}"
+                  class="card-cadastro row d-flex align-items-end">
+
+                <h1 class="card-header h4 card-title p-4">MINHA CONTA DA KEYSTOW</h1>
+
+                <div class="card-body col col-md-7  p-4">
+                    <p class="fw-bold">Uma única conta para gerenciar remotamente a proteção de todas as suas
+                        senhas.</p>
+                    <div class="d-flex flex-column gap-3">
+                        <a class="btn btn-lg bg-white border-light shadow-sm" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="37.667" height="37.667"
+                                 viewBox="0 0 37.667 37.667">
+                                <path d="M17.784,7.282a10.438,10.438,0,0,1,7.282,2.8L30.382,4.9A18.1,18.1,0,0,0,17.784,0,18.82,18.82,0,0,0,.96,10.379l6.089,4.729A11.384,11.384,0,0,1,17.784,7.282Z"
+                                      transform="translate(1.049)" fill="#ea4335" fill-rule="evenodd"
+                                      data-darkreader-inline-fill="" style="--darkreader-inline-fill:#ff7364;"></path>
+                                <path d="M27.08,11.21a16.134,16.134,0,0,0-.4-3.85H9v6.989H19.379a9.2,9.2,0,0,1-3.85,6.11l5.943,4.6A18.414,18.414,0,0,0,27.08,11.21Z"
+                                      transform="translate(9.833 8.041)" fill="#4285f4" fill-rule="evenodd"
+                                      data-darkreader-inline-fill="" style="--darkreader-inline-fill:#65c7ff;"></path>
+                                <path d="M8.119,17.139a11.593,11.593,0,0,1-.628-3.725A12.184,12.184,0,0,1,8.1,9.689L2.009,4.96a18.793,18.793,0,0,0,0,16.908Z"
+                                      transform="translate(0 5.419)" fill="#fbbc05" fill-rule="evenodd"
+                                      data-darkreader-inline-fill="" style="--darkreader-inline-fill:#fff346;"></path>
+                                <path d="M17.774,25.889a17.95,17.95,0,0,0,12.472-4.562l-5.943-4.6a11.147,11.147,0,0,1-6.529,1.883A11.338,11.338,0,0,1,7.059,10.78L.97,15.509A18.788,18.788,0,0,0,17.774,25.889Z"
+                                      transform="translate(1.06 11.778)" fill="#34a853" fill-rule="evenodd"
+                                      data-darkreader-inline-fill="" style="--darkreader-inline-fill:#86fca5;"></path>
+                                <path d="M0,0H37.667V37.667H0Z" fill="none" fill-rule="evenodd"></path>
+                            </svg>
+                            Registre-se pelo Google
+                        </a>
+
+                        <a class="btn btn-lg bg-white border-light shadow-sm" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="37" height="37" viewBox="0 0 37 37">
+                                <path d="M34.958,37A2.042,2.042,0,0,0,37,34.958V2.042A2.042,2.042,0,0,0,34.958,0H2.042A2.042,2.042,0,0,0,0,2.042V34.958A2.042,2.042,0,0,0,2.042,37H34.958"
+                                      fill="#395185"/>
+                                <path d="M113.678,69.229V55.287h4.68l.7-5.433h-5.38V46.385c0-1.573.437-2.645,2.693-2.645h2.877V38.879a38.458,38.458,0,0,0-4.192-.214c-4.148,0-6.988,2.532-6.988,7.182v4.007h-4.692v5.433h4.692V69.229h5.611"
+                                      transform="translate(-88.117 -32.229)" fill="#fff"/>
+                            </svg>
+                            Continuar pelo Facebook
+                        </a>
+                    </div>
+
+                    <p class="mt-4 fw-bold">ou use seu endereço de e-mail:</p>
+
+                    <div class="form-floating my-3">
+                        <input type="text" th:field="*{userModelName}" th:errorclass="is-invalid" class="form-control"
+                               id="floatingInputname"
+                               placeholder="Seu nome">
+                        <label for="floatingInputname">Seu nome</label>
+                        <div class="form-text">
+                            Como devemos chamá-lo?
+                        </div>
+                        <div class="invalid-feedback" th:errors="*{userModelName}">
+                            Erros com name
+                        </div>
+                    </div>
+
+                    <div class="form-floating my-3">
+                        <input type="email" th:field="*{email}" th:errorclass="is-invalid" class="form-control"
+                               id="floatingInputEmail"
+                               placeholder="name@example.com">
+                        <label for="floatingInputEmail">Endereço de E-mail</label>
+                        <div class="form-text">
+                            Você usará seu endereço de e-mail para fazer login.
+                        </div>
+                        <div class="invalid-feedback" th:errors="*{email}">
+                            Erros com email
+                        </div>
+                    </div>
+
+                    <div class="form-floating my-3">
+                        <input type="text" th:field="*{password}" th:errorclass="is-invalid" class="form-control"
+                               id="floatingInputPassword"
+                               placeholder="Senha mestra">
+                        <label for="floatingInputPassword">Senha mestra</label>
+                        <div class="form-text">
+                            A senha mestra é a senha que você usa para acessar seu cofre. É muito importante que você
+                            não esqueça sua senha mestra. Não há como recuperar a senha caso você a esqueça.
+                        </div>
+                        <div class="invalid-feedback" th:errors="*{password}">
+                            Erros com password
+                        </div>
+                    </div>
+
+                    <div class="form-floating my-3">
+                        <input type="text" th:field="*{confirmedPassword}" th:errorclass="is-invalid"
+                               class="form-control"
+                               id="floatingInputPasswordAgain"
+                               placeholder="Digite novamente a senha mestra">
+                        <label for="floatingInputPasswordAgain">Digite novamente a senha mestra</label>
+                        <div class="invalid-feedback" th:errors="*{confirmedPassword}">
+                            Erros com password novamente
+                        </div>
+                    </div>
+
+                    <div class="form-floating my-3">
+                        <input type="text" th:field="*{tipPassword}" th:errorclass="is-invalid" class="form-control"
+                               id="floatingPassword"
+                               placeholder="Dica de senha mestra (opcional)">
+                        <label for="floatingPassword">Dica de senha mestra (opcional)</label>
+                        <div id="emailHelp" class="form-text">
+                            Uma dica de senha mestra pode ajudá-lo a lembrar sua senha caso a esqueça.
+                        </div>
+                        <div class="invalid-feedback" th:errors="*{tipPassword}">
+                            Erros com password
+                        </div>
+                    </div>
+
+                    <div class="mt-2 form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">
+                            Ao clicar no botão "Criar conta", você concorda com as seguintes políticas:
+                            <a href="#" target="_blank" class="text-decoration-none">Termos
+                                de Serviço</a>,
+                            <a href="#" target="_blank" class="text-decoration-none">Política de Privacidade</a>
+                        </label>
+                    </div>
+
+                </div>
+
+                <div class="col col-md-5 pb-4">
+                    <ul class="list-unstyled">
+                        <li>— Pelo menos 8 caracteres</li>
+                        <li>— Letras maiúsculas e minúsculas</li>
+                        <li>— Ao menos um número</li>
+                        <li>— Caracteres especiais válidos</li>
+                        <li>— As senhas correspondem</li>
+                    </ul>
+                </div>
+
+                <div class="card-footer p-4 d-flex flex-column flex-sm-row gap-3">
+                    <button type="submit" class="btn btn-lg bg-primary text-white">Criar conta</button>
+                    <a href="/login" class="btn btn-lg btn-outline-primary">Cancelar</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

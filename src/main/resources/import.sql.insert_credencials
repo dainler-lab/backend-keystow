@@ -1,0 +1,9 @@
+INSERT INTO credenciais(tipo, nome, data_da_operacao, favorito, lixeira, campo_de_usuario, senha, uri)
+VALUES ('CREDENCIAL', 'Ana', '2019-05-05 18:00:00', false, false, 'ana@gmail.com', 'senha@pass', 'google.com');
+
+INSERT INTO credenciais(tipo, nome, data_da_operacao, favorito, lixeira, campo_de_usuario, senha, uri)
+VALUES ('CREDENCIAL', 'Bruna', '2019-05-05 18:00:00', false, false, 'bruna@gmail.com', 'senha@pass', 'google.com');
+
+INSERT INTO cartoes(nome, tipo, data_da_operacao, favorito, lixeira, titular_do_cartao, numero, bandeira,
+mes_do_vencimento, ano_do_vencimento, codigo_de_seguranca)
+VALUES ('Ana', 'CARTAO', '2019-05-05 18:00:00', false, false, 'Ana Gomes', '1234123412341234', 'VISA', '12', '2025', '234');

@@ -1,0 +1,24 @@
+#header-intro {
+  background: url('../assets/img/bg-intro.jpg');
+  background-size: contain;
+}
+
+.section2 {
+  background-color: #dddddd;
+}
+
+.section4 {
+  background: url('../assets/icons/s4.svg'),
+    url('../assets/img/img-s4.svg') #018786;
+  background-repeat: no-repeat, no-repeat;
+  background-position: center right, center left;
+  background-size: auto, auto;
+}
+
+.bg-copy {
+  background-color: #121f84;
+}
+
+label {
+  margin-bottom: 0.5rem;
+}

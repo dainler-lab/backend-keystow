@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::div})}">
+
+<head>
+    <title>Keystow</title>
+</head>
+
+<body>
+
+<div></div>
+
+</body>
+
+</html>
+
+<nav th:fragment="nav-app" class="navbar navbar-expand-md navbar-dark bg-primary py-3 shadow-sm">
+    <div class="container">
+        <a th:href="@{/app}" class="navbar-brand">
+            <img src="assets/logo/keystow-logo-text-branco-final.svg" alt="Logo Keystow">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle link-light text-white d-block" id="navbarDropdown"
+                       role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle"/>
+                    </a>
+
+                    <ul class="dropdown-menu shadow text-small dropdown-menu-start" data-bs-display="static"
+                        aria-expanded="false"
+                        aria-labelledby="navbarDropdown"
+                        data-popper-placement="top-start">
+
+                        <li class="dropdown-item-text">
+                            <div class="fw-bold" sec:authentication="principal.displayName"></div>
+                            <div class="fw-light font-monospace" sec:authentication="principal.username"></div>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider"/>
+                        </li>
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li>
+                            <a class="dropdown-item" href="#" sec:authorize="isAuthenticated()"
+                               onclick="document.querySelector('#form-logout').submit()"
+                            >Sair</a>
+                        </li>
+                        <form id="form-logout" th:action="@{/logout}" method="post"></form>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br" th:replace="~{app :: layout(~{::title}, ~{::div})}">
+
+<head>
+    <title>Dica de Senha</title>
+</head>
+
+<body>
+<div class="container my-5">
+    <div class="d-flex justify-content-center">
+
+        <form class="card col-10 col-sm-10 col-md-7 col-lg-5">
+
+            <div class="card-body p-4">
+                <div class="text-center mb-2">
+                    <img th:src="@{assets/logo/logo-height-black.svg}" alt="logo keystow" class="img-fluid">
+                </div>
+
+                <div class="form-floating mt-3">
+                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Endereço de E-mail</label>
+                    <div id="emailHelp" class="form-text">Digite o endereço de e-mail da sua conta para receber sua dica
+                        de senha mestra.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer p-4  d-flex flex-column flex-sm-row gap-3">
+                <button type="submit" class="btn btn-lg bg-primary text-white">Enviar</button>
+                <a th:href="@{/login}" class="btn btn-lg btn-outline-primary">Cancelar</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+</body>
+
+</html>
