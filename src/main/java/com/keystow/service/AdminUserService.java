@@ -1,6 +1,6 @@
 package com.keystow.service;
 
-import com.keystow.dto.UserDto;
+import com.keystow.dto.user.AdminCreateUserFormDataDto;
 import com.keystow.model.user.UserModel;
 import com.keystow.model.user.UserRole;
 import com.keystow.repository.UserRepository;
@@ -30,22 +30,30 @@ public class AdminUserService {
 		this.modelMapper = modelMapper;
 	}
 
-	public void createUsersToRoleUser(UserDto userDto) {
-		LOGGER.debug("Creating user {} ({})", userDto.getUserModelName(), userDto.getEmail());
-		UserModel userModel = modelMapper.map(userDto, UserModel.class);
+	public void createUsersToRoleUser(AdminCreateUserFormDataDto userFormDataDto) {
+		LOGGER.debug("Creating user {} ({})", userFormDataDto.getUserModelName(), userFormDataDto.getEmail());
+		UserModel userModel = modelMapper.map(userFormDataDto, UserModel.class);
 		userModel.setEnabled(true);
 		userModel.setCreatedAt(LocalDateTime.now());
 		userModel.setRoles(Set.of(UserRole.USER));
-		modelMapper.map(userRepository.save(userModel), UserDto.class);
+		modelMapper.map(userRepository.save(userModel), AdminCreateUserFormDataDto.class);
 	}
 
-	public void createUsersToRoleAdmin(UserDto userDto) {
-		LOGGER.debug("Creating user {} ({})", userDto.getUserModelName(), userDto.getEmail());
-		UserModel userModel = modelMapper.map(userDto, UserModel.class);
+	public void createUsersToRoleAdmin(AdminCreateUserFormDataDto userFormDataDto) {
+		LOGGER.debug("Creating user {} ({})", userFormDataDto.getUserModelName(), userFormDataDto.getEmail());
+		UserModel userModel = modelMapper.map(userFormDataDto, UserModel.class);
 		userModel.setEnabled(true);
 		userModel.setCreatedAt(LocalDateTime.now());
 		userModel.setRoles(Set.of(UserRole.USER, UserRole.ADMIN));
-		modelMapper.map(userRepository.save(userModel), UserDto.class);
+		modelMapper.map(userRepository.save(userModel), AdminCreateUserFormDataDto.class);
+	}
+
+	public void createUser(AdminCreateUserFormDataDto userFormDataDto) {
+
+		if (userFormDataDto.getUserRole().equals(UserRole.ADMIN))
+			createUsersToRoleAdmin(userFormDataDto);
+		else
+			createUsersToRoleUser(userFormDataDto);
 	}
 
 }

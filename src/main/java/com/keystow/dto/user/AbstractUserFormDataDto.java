@@ -1,9 +1,8 @@
-package com.keystow.dto;
+package com.keystow.dto.user;
 
 import com.keystow.validate.group.ValidationGroupOne;
 import com.keystow.validate.group.ValidationGroupTwo;
-import com.keystow.validate.passwods.EqualsPasswords;
-import com.keystow.validate.user.NotExistingUser;
+import com.keystow.validate.user.UserNotExisting;
 import lombok.Data;
 
 import javax.validation.constraints.Email;
@@ -11,10 +10,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+@UserNotExisting(groups = ValidationGroupTwo.class)
 @Data
-@EqualsPasswords(groups = ValidationGroupTwo.class)
-@NotExistingUser(groups = ValidationGroupTwo.class)
-public class UserDto {
+public class AbstractUserFormDataDto {
 
 	private Long id;
 
@@ -32,8 +30,5 @@ public class UserDto {
 	@Size(min = 8, max = 200, groups = ValidationGroupOne.class)
 	@NotBlank
 	private String password;
-
-	@NotBlank
-	private String confirmedPassword;
 
 }

@@ -9,10 +9,10 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = NotExistingUserValidator.class)
-public @interface NotExistingUser {
+@Constraint(validatedBy = UserNotExistingValidator.class)
+public @interface UserNotExisting {
 
-	String message() default "{MsgUserAlreadyExisting}";
+	String message() default "{UserNotExistingMessage}";
 
 	Class<?>[] groups() default {};
 

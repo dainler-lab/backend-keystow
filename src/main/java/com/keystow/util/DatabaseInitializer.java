@@ -1,7 +1,7 @@
 package com.keystow.util;
 
 import com.github.javafaker.Faker;
-import com.keystow.dto.UserDto;
+import com.keystow.dto.user.AdminCreateUserFormDataDto;
 import com.keystow.service.AdminUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -24,22 +24,22 @@ public class DatabaseInitializer implements CommandLineRunner {
 	}
 
 	@Override
-	public void run(String... args) throws Exception {
+	public void run(String... args) {
 
-		UserDto userDtoAdmin = new UserDto();
-		userDtoAdmin.setUserModelName("Administrador");
-		userDtoAdmin.setEmail("admin@email.com");
-		userDtoAdmin.setPassword("&35D479!&e8SW*4&$$3A*P");
-		userDtoAdmin.setTipPassword("Generate Password...");
-		adminUserService.createUsersToRoleAdmin(userDtoAdmin);
+		AdminCreateUserFormDataDto adminDto = new AdminCreateUserFormDataDto();
+		adminDto.setUserModelName("Administrador");
+		adminDto.setEmail("admin@email.com");
+		adminDto.setPassword("&35D479!&e8SW*4&$$3A*P");
+		adminDto.setTipPassword("Generate Password...");
+		adminUserService.createUsersToRoleAdmin(adminDto);
 
 		for (int i = 0; i < 20; i++) {
-			UserDto userDto = newRandomUserDtoParameters();
+			AdminCreateUserFormDataDto userDto = newRandomUserFormDataDtoParameters();
 			adminUserService.createUsersToRoleUser(userDto);
 		}
 	}
 
-	private UserDto newRandomUserDtoParameters() {
+	private AdminCreateUserFormDataDto newRandomUserFormDataDtoParameters() {
 
 		String firstName = randomUserModelFirstName();
 		String lastName = randomUserModelLastName();
@@ -47,9 +47,9 @@ public class DatabaseInitializer implements CommandLineRunner {
 
 		String username = firstName.toLowerCase() + "." + lastName.toLowerCase();
 		String email = randomUserModelEmail(username);
-		String password = username + "@pass";
+		String password = username + "@password";
 
-		UserDto userDto = new UserDto();
+		AdminCreateUserFormDataDto userDto = new AdminCreateUserFormDataDto();
 		userDto.setUserModelName(fullName);
 		userDto.setEmail(email);
 		userDto.setPassword(password);

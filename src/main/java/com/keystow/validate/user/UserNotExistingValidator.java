@@ -1,41 +1,41 @@
 package com.keystow.validate.user;
 
-import com.keystow.dto.UserDto;
+import com.keystow.dto.user.AbstractUserFormDataDto;
 import com.keystow.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class NotExistingUserValidator implements ConstraintValidator<NotExistingUser, UserDto> {
+public class UserNotExistingValidator implements ConstraintValidator<UserNotExisting, AbstractUserFormDataDto> {
 
 	private final UserService userService;
 
 	@Autowired
-	public NotExistingUserValidator(UserService userService) {
+	public UserNotExistingValidator(UserService userService) {
 		this.userService = userService;
 	}
 
 	@Override
-	public void initialize(NotExistingUser constraintAnnotation) {
+	public void initialize(UserNotExisting constraintAnnotation) {
 		//
 	}
 
 	@Override
-	public boolean isValid(UserDto userDto, ConstraintValidatorContext context) {
+	public boolean isValid(AbstractUserFormDataDto userDto, ConstraintValidatorContext context) {
 		// @formatter:off
         if (userService.userWithEmailExists(userDto.getEmail())) {
             context.disableDefaultConstraintViolation();
             context
-                    .buildConstraintViolationWithTemplate("{MsgUserAlreadyExisting}")
+                    .buildConstraintViolationWithTemplate("{UserNotExistingMessage}")
                     .addPropertyNode("email")
                     .addConstraintViolation();
 
             return false;
         }
+		// @formatter:on
 
-        return true;
-        // @formatter:on
+		return true;
 	}
 
 }

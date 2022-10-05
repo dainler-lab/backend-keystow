@@ -1,6 +1,6 @@
 package com.keystow.controller;
 
-import com.keystow.dto.UserDto;
+import com.keystow.dto.user.CreateUserFormDataDto;
 import com.keystow.service.UserService;
 import com.keystow.validate.group.ValidationGroupSequence;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
 @RequestMapping("/user")
+@Controller
 public class UserController {
 
-	private UserService userService;
+	private final UserService userService;
 
 	@Autowired
 	public UserController(UserService userService) {
@@ -27,20 +27,21 @@ public class UserController {
 	@GetMapping("/signup")
 	public String viewUserFormPageSignup(Model model) {
 
-		model.addAttribute("userDto", new UserDto());
+		model.addAttribute("user", new CreateUserFormDataDto());
 
 		return "user/signup";
 	}
 
 	@PostMapping("/create")
-	public String createUser(@Validated(ValidationGroupSequence.class) @ModelAttribute("userDto") UserDto userDto,
+	public String createUser(
+			@Validated(ValidationGroupSequence.class) @ModelAttribute("user") CreateUserFormDataDto user,
 			BindingResult result) {
 
 		if (result.hasErrors()) {
 			return "user/signup";
 		}
 
-		userService.saveUser(userDto);
+		userService.saveUser(user);
 
 		return "redirect:/login";
 	}

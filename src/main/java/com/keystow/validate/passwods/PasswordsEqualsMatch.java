@@ -9,10 +9,10 @@ import java.lang.annotation.Target;
 
 @Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = { EqualsPasswordsValidator.class })
-public @interface EqualsPasswords {
+@Constraint(validatedBy = { PasswordsEqualsMatchValidator.class })
+public @interface PasswordsEqualsMatch {
 
-	String message() default "{MsgEqualsPasswords}";
+	String message() default "{PasswordsEqualsMatchMessage}";
 
 	Class<?>[] groups() default {};
 

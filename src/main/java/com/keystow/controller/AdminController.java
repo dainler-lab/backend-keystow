@@ -1,8 +1,8 @@
 package com.keystow.controller;
 
-import com.keystow.dto.UserDto;
+import com.keystow.dto.user.AdminCreateUserFormDataDto;
 import com.keystow.model.user.UserRole;
-import com.keystow.service.UserService;
+import com.keystow.service.AdminUserService;
 import com.keystow.validate.group.ValidationGroupSequence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -17,37 +17,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Set;
 
-@Controller
+@Secured("ROLE_ADMIN")
 @RequestMapping("/admin")
+@Controller
 public class AdminController {
 
-	private UserService userService;
+	private final AdminUserService adminUserService;
 
 	@Autowired
-	public AdminController(UserService userService) {
-		this.userService = userService;
+	public AdminController(AdminUserService adminUserService) {
+		this.adminUserService = adminUserService;
 	}
 
 	@GetMapping("/create")
-	@Secured("ROLE_ADMIN")
-	public String viewUserFormPageCreate(Model model) {
-		model.addAttribute("userDto", new UserDto()); // userFormDataDto
-		model.addAttribute("genders", Set.of(UserRole.USER, UserRole.ADMIN));
-		// model.addAttribute("editMode", EditMode.CREATE);
+	public String viewPageFormCreateUser(Model model) {
+		model.addAttribute("userFormDataDto", new AdminCreateUserFormDataDto());
+		model.addAttribute("possibleRoles", Set.of(UserRole.USER, UserRole.ADMIN));
 		return "user/edit";
 	}
 
 	@PostMapping("/create")
-	public String createUser(@Validated(ValidationGroupSequence.class) @ModelAttribute("userDto") UserDto userDto,
-			BindingResult result) {
+	public String createUser(
+			@Validated(ValidationGroupSequence.class) @ModelAttribute("userFormDataDto") AdminCreateUserFormDataDto userFormDataDto,
+			BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
+			model.addAttribute("possibleRoles", Set.of(UserRole.USER, UserRole.ADMIN));
 			return "user/edit";
 		}
 
-		userService.saveUser(userDto);
+		adminUserService.createUser(userFormDataDto);
 
-		return "redirect:/login";
+		return "redirect:/app";
 	}
 
 }

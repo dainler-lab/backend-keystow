@@ -10,7 +10,7 @@
     <div class="row m-4">
         <div class="card col-10 col-sm-10 col-md col-lg-9 m-auto">
 
-            <form th:action="@{/user/create}" method="post" th:object="${userDto}"
+            <form th:action="@{/user/create}" method="post" th:object="${user}"
                   class="card-cadastro row d-flex align-items-end">
 
                 <h1 class="card-header h4 card-title p-4">MINHA CONTA DA KEYSTOW</h1>
@@ -93,12 +93,12 @@
                     </div>
 
                     <div class="form-floating my-3">
-                        <input type="text" th:field="*{confirmedPassword}" th:errorclass="is-invalid"
+                        <input type="text" th:field="*{passwordRepeated}" th:errorclass="is-invalid"
                                class="form-control"
                                id="floatingInputPasswordAgain"
                                placeholder="Digite novamente a senha mestra">
                         <label for="floatingInputPasswordAgain">Digite novamente a senha mestra</label>
-                        <div class="invalid-feedback" th:errors="*{confirmedPassword}">
+                        <div class="invalid-feedback" th:errors="*{passwordRepeated}">
                             Erros com password novamente
                         </div>
                     </div>
